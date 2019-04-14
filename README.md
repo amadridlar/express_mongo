@@ -14,6 +14,8 @@ email: String
 
 gender: String 
 
+phone: String
+
 ## Start the server
 
 First, you need to have started your MongoDB database. Usually this can be done by executing ```mongod``` 
