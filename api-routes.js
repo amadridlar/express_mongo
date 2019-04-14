@@ -5,7 +5,7 @@ let contactController = require('./contactController');
 router.get('/', function (req, res) {
     res.json({
        status: 'API Its Working',
-       message: 'Welcome to RESTHub crafted with love!',
+       message: 'Welcome to express and mongodb api',
     });
 });
 
