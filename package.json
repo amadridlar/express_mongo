@@ -1,0 +1,22 @@
+{
+  "name": "express_mongo",
+  "version": "0.0.1",
+  "description": "Simple API REST implemented with expressjs and mongodb",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -L index.js",
+    "start": "node index.js"
+  },
+  "author": "amadridlar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "colors": "^1.3.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}
