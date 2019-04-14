@@ -4,8 +4,8 @@
   "description": "Simple API REST implemented with expressjs and mongodb",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -L index.js",
-    "start": "node index.js",
+    "dev": "nodemon -L src/index.js",
+    "start": "node src/index.js",
     "test-e2e": "newman run test/postman-collections/express_mongodb.postman_collection.json -e test/postman-collections/express_mongodb.postman_environment.json"
   },
   "author": "amadridlar",
