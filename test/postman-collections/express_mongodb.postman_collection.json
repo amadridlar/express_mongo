@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "f58baea2-8315-4786-b4dd-b37ad8801215",
+		"name": "express_mongodb",
+		"description": "Endpoints to test the express_mongodb API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Default entrypoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f6a6ae57-1b65-46b0-a2ea-95c20c850e0e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    pm.test(\"Your test name\", function () {",
+							"        var jsonData = pm.response.json();",
+							"        pm.expect(jsonData.status).to.eql('API Its Working');",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all contacts information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a15c20b1-2dca-4df7-a5c4-ace109a67429",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    pm.test(\"Response contains user data\", function () {",
+							"        pm.response.to.have.jsonBody('data');",
+							"    });",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/contacts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"contacts"
+					]
+				},
+				"description": "Get all contacts informations storaged in database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0abad51-6997-40f4-aa69-dcd51bd3aa34",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"userId\", jsonData.data._id);",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Johny Reland\",\n    \"gender\": \"undefined\",\n    \"email\": \"eljonas@mail.com\",\n    \"phone\": \"666555444\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/contacts",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"contacts"
+					]
+				},
+				"description": "Storage a new contact information in database"
+			},
+			"response": []
+		},
+		{
+			"name": "Get contact information by userId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e29085c-e39c-4bf7-b294-adc9b62639d0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.test(\"userId\", function () {",
+							"        pm.expect(jsonData.data._id).to.eql(pm.variables.get(\"userId\"));",
+							"    });",
+							"    ",
+							"    pm.test(\"name\", function () {",
+							"        pm.expect(jsonData.data.name).to.eql('Johny Reland');",
+							"    });",
+							"    ",
+							"    pm.test(\"gender\", function () {",
+							"        pm.expect(jsonData.data.gender).to.eql('undefined');",
+							"    });",
+							"    ",
+							"    pm.test(\"email\", function () {",
+							"        pm.expect(jsonData.data.email).to.eql('eljonas@mail.com');",
+							"    });",
+							"    ",
+							"    pm.test(\"phone\", function () {",
+							"        pm.expect(jsonData.data.phone).to.eql('666555444');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{host}}/api/contacts/{{userId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"contacts",
+						"{{userId}}"
+					]
+				},
+				"description": "Get the contact user storage in database by its id"
+			},
+			"response": []
+		},
+		{
+			"name": "Modify contact information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e29085c-e39c-4bf7-b294-adc9b62639d0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.test(\"userId\", function () {",
+							"        pm.expect(jsonData.data._id).to.eql(pm.variables.get(\"userId\"));",
+							"    });",
+							"    ",
+							"    pm.test(\"name\", function () {",
+							"        pm.expect(jsonData.data.name).to.eql('Johny Reland');",
+							"    });",
+							"    ",
+							"    pm.test(\"gender\", function () {",
+							"        pm.expect(jsonData.data.gender).to.eql('let me gess');",
+							"    });",
+							"    ",
+							"    pm.test(\"email\", function () {",
+							"        pm.expect(jsonData.data.email).to.eql('eljonas@mail.com');",
+							"    });",
+							"    ",
+							"    pm.test(\"phone\", function () {",
+							"        pm.expect(jsonData.data.phone).to.eql('666555444');",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Johny Reland\",\n    \"gender\": \"let me gess\",\n    \"email\": \"eljonas@mail.com\",\n    \"phone\": \"666555444\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/contacts/{{userId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"contacts",
+						"{{userId}}"
+					]
+				},
+				"description": "Modify the information of a user already storaged in database"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove contact",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3e29085c-e39c-4bf7-b294-adc9b62639d0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    ",
+							"    pm.test(\"contact deleted\", function () {",
+							"        var jsonData = pm.response.json();",
+							"        pm.expect(jsonData.message).to.eql('Contact deleted');",
+							"    });",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Johny Reland\",\n    \"gender\": \"let me gess\",\n    \"email\": \"eljonas@mail.com\",\n    \"phone\": \"666555444\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/contacts/{{userId}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"contacts",
+						"{{userId}}"
+					]
+				},
+				"description": "Remove a contact storaged in database"
+			},
+			"response": []
+		}
+	]
+}
