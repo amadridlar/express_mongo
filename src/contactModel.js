@@ -18,9 +18,10 @@ let contactSchema = mongoose.Schema({
     }
 });
 
-// Export Contact model
-let Contact = module.exports = mongoose.model('contact', contactSchema);
+let contact = mongoose.model('contact', contactSchema);
 
-module.exports.get = function (callback, limit) {
-    Contact.find(callback).limit(limit);
-}
+contact.get = function (callback, limit)  {
+    contact.find(callback).limit(limit);
+};
+
+module.exports = contact;
