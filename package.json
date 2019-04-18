@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "start-dev": "nodemon -L src/index.js",
-    "test-e2e": "newman run test/postman-collections/express_mongodb.postman_collection.json -e test/postman-collections/express_mongodb.postman_environment.json"
+    "test": "jest --config=test/jest.config.js",
+    "test-coverage": "jest --coverage",
+    "test-e2e": "newman run test/e2e/postman-collections/express_mongodb.postman_collection.json -e test/e2e/postman-collections/express_mongodb.postman_environment.json"
   },
   "author": "amadridlar",
   "license": "ISC",
